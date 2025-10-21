@@ -87,7 +87,7 @@
 
             .stats {
                 display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
                 gap: 20px;
                 padding: 30px 40px;
                 background: #f8f9fa;
@@ -115,6 +115,129 @@
                 font-size: 13px;
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
+            }
+
+            .stat-due-soon {
+                border: 2px solid #ff9800;
+            }
+
+            .stat-due-soon h3 {
+                background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+            }
+
+            .upcoming-section {
+                padding: 30px 40px;
+                background: white;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .upcoming-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .upcoming-header h2 {
+                font-size: 20px;
+                color: #1a1a1a;
+                margin: 0;
+            }
+
+            .btn-small {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+
+            .upcoming-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 15px;
+            }
+
+            .upcoming-item {
+                background: #f8f9fa;
+                padding: 15px;
+                border-radius: 8px;
+                border-left: 4px solid #ff9800;
+                transition: transform 0.2s;
+            }
+
+            .upcoming-item:hover {
+                transform: translateX(5px);
+            }
+
+            .upcoming-item.critical {
+                border-left-color: #c62828;
+                background: #fff5f5;
+            }
+
+            .upcoming-item.warning {
+                border-left-color: #ff9800;
+            }
+
+            .upcoming-item.soon {
+                border-left-color: #ffc107;
+            }
+
+            .upcoming-item-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: start;
+                margin-bottom: 8px;
+            }
+
+            .upcoming-item-id {
+                font-weight: 700;
+                color: #1a1a1a;
+                font-size: 14px;
+            }
+
+            .upcoming-item-days {
+                font-size: 12px;
+                font-weight: 600;
+                padding: 4px 8px;
+                border-radius: 4px;
+                white-space: nowrap;
+            }
+
+            .upcoming-item-days.critical {
+                background: #ffcdd2;
+                color: #c62828;
+            }
+
+            .upcoming-item-days.warning {
+                background: #ffe0b2;
+                color: #e65100;
+            }
+
+            .upcoming-item-days.soon {
+                background: #fff9c4;
+                color: #f57f17;
+            }
+
+            .upcoming-item-desc {
+                font-size: 13px;
+                color: #666;
+                line-height: 1.4;
+                margin-bottom: 8px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .upcoming-item-meta {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 12px;
+                color: #999;
             }
 
             .table-container {
@@ -491,9 +614,26 @@
                     <h3 id="overdue-tasks">2</h3>
                     <p>Overdue</p>
                 </div>
+                <div class="stat-card stat-due-soon">
+                    <h3 id="due-soon-tasks">0</h3>
+                    <p>Due Soon (3 days)</p>
+                </div>
                 <div class="stat-card">
                     <h3 id="hours-remaining">0</h3>
                     <p>Hours Remaining</p>
+                </div>
+            </div>
+
+            <!-- Upcoming Tasks Widget -->
+            <div class="upcoming-section">
+                <div class="upcoming-header">
+                    <h2>📅 Upcoming Deadlines</h2>
+                    <button class="btn btn-secondary btn-small" onclick="toggleEmailNotifications()">
+                        🔔 Email Alerts
+                    </button>
+                </div>
+                <div id="upcoming-tasks" class="upcoming-list">
+                    <!-- Will be populated by JS -->
                 </div>
             </div>
 
@@ -1184,6 +1324,24 @@
                 return deadlineDate < today;
             }
 
+            // Calculate days until deadline
+            function daysUntilDeadline(deadline) {
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const deadlineDate = new Date(deadline);
+                deadlineDate.setHours(0, 0, 0, 0);
+                const diffTime = deadlineDate - today;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                return diffDays;
+            }
+
+            // Check if task is due soon (within 3 days)
+            function isDueSoon(deadline, status) {
+                if (status === 'completed') return false;
+                const days = daysUntilDeadline(deadline);
+                return days >= 0 && days <= 3;
+            }
+
             // Update statistics
             function updateStats() {
                 const total = tasks.length;
@@ -1196,6 +1354,9 @@
                 const overdue = tasks.filter((t) =>
                     isOverdue(t.deadline, t.status)
                 ).length;
+                const dueSoon = tasks.filter((t) =>
+                    isDueSoon(t.deadline, t.status)
+                ).length;
                 const hoursRemaining = tasks
                     .filter((t) => t.status !== "completed")
                     .reduce((sum, t) => sum + (t.hours || 0), 0);
@@ -1206,6 +1367,7 @@
                 document.getElementById("in-progress-tasks").textContent =
                     inProgress;
                 document.getElementById("overdue-tasks").textContent = overdue;
+                document.getElementById("due-soon-tasks").textContent = dueSoon;
                 document.getElementById("hours-remaining").textContent =
                     hoursRemaining;
 
@@ -1219,6 +1381,9 @@
                 document.getElementById("current-date").textContent =
                     "Status as of " +
                     today.toLocaleDateString("en-US", options);
+                
+                // Update upcoming tasks section
+                renderUpcomingTasks();
             }
 
             // Render table
@@ -1561,6 +1726,128 @@
                 renderTable();
             }
 
+            // Render upcoming tasks
+            function renderUpcomingTasks() {
+                const upcomingContainer = document.getElementById("upcoming-tasks");
+                
+                // Get tasks that are not completed and sort by deadline
+                const upcomingTasks = tasks
+                    .filter(t => t.status !== 'completed')
+                    .map(t => ({
+                        ...t,
+                        daysUntil: daysUntilDeadline(t.deadline)
+                    }))
+                    .filter(t => t.daysUntil >= 0 && t.daysUntil <= 7) // Next 7 days
+                    .sort((a, b) => a.daysUntil - b.daysUntil);
+
+                if (upcomingTasks.length === 0) {
+                    upcomingContainer.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No upcoming deadlines in the next 7 days! 🎉</p>';
+                    return;
+                }
+
+                upcomingContainer.innerHTML = upcomingTasks.map((task, index) => {
+                    const displayNumber = tasks.indexOf(task) + 1;
+                    let urgencyClass = 'soon';
+                    let daysText = '';
+                    
+                    if (task.daysUntil === 0) {
+                        urgencyClass = 'critical';
+                        daysText = 'Due Today!';
+                    } else if (task.daysUntil === 1) {
+                        urgencyClass = 'critical';
+                        daysText = 'Due Tomorrow';
+                    } else if (task.daysUntil <= 3) {
+                        urgencyClass = 'warning';
+                        daysText = `${task.daysUntil} days`;
+                    } else {
+                        urgencyClass = 'soon';
+                        daysText = `${task.daysUntil} days`;
+                    }
+
+                    return `
+                        <div class="upcoming-item ${urgencyClass}">
+                            <div class="upcoming-item-header">
+                                <span class="upcoming-item-id">Task #${displayNumber}</span>
+                                <span class="upcoming-item-days ${urgencyClass}">${daysText}</span>
+                            </div>
+                            <div class="upcoming-item-desc">${task.desc}</div>
+                            <div class="upcoming-item-meta">
+                                <span>${capitalizeFirst(task.assignee)}</span>
+                                <span>${formatDate(task.deadline)}</span>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            // Email notification modal and functionality
+            function toggleEmailNotifications() {
+                const email = localStorage.getItem('notificationEmail');
+                
+                if (email) {
+                    if (confirm(`Email alerts are currently set for: ${email}\n\nDo you want to remove email notifications?`)) {
+                        localStorage.removeItem('notificationEmail');
+                        alert('Email notifications disabled');
+                    }
+                } else {
+                    const newEmail = prompt('Enter your email to receive deadline reminders:');
+                    if (newEmail && newEmail.includes('@')) {
+                        localStorage.setItem('notificationEmail', newEmail);
+                        alert(`Email notifications enabled for ${newEmail}\n\nNote: This stores your email locally. To enable actual email delivery, you can integrate with EmailJS or similar service.`);
+                        
+                        // Check for upcoming deadlines and show what would be sent
+                        checkAndNotify();
+                    } else if (newEmail) {
+                        alert('Please enter a valid email address');
+                    }
+                }
+            }
+
+            // Check and notify about upcoming deadlines
+            function checkAndNotify() {
+                const email = localStorage.getItem('notificationEmail');
+                if (!email) return;
+
+                const upcomingTasks = tasks
+                    .filter(t => t.status !== 'completed')
+                    .map(t => ({
+                        ...t,
+                        daysUntil: daysUntilDeadline(t.deadline)
+                    }))
+                    .filter(t => t.daysUntil >= 0 && t.daysUntil <= 3);
+
+                if (upcomingTasks.length > 0) {
+                    const message = `You have ${upcomingTasks.length} task(s) due soon:\n\n` +
+                        upcomingTasks.map(t => {
+                            const displayNumber = tasks.indexOf(t) + 1;
+                            const daysText = t.daysUntil === 0 ? 'TODAY' : t.daysUntil === 1 ? 'TOMORROW' : `in ${t.daysUntil} days`;
+                            return `• Task #${displayNumber}: Due ${daysText}\n  ${t.desc.substring(0, 60)}...`;
+                        }).join('\n\n');
+                    
+                    console.log('Upcoming deadline reminder:', message);
+                    // Browser notification (if user has granted permission)
+                    if ('Notification' in window && Notification.permission === 'granted') {
+                        new Notification('Task Deadlines Approaching!', {
+                            body: `You have ${upcomingTasks.length} task(s) due soon. Check your task manager!`,
+                            icon: '📋'
+                        });
+                    }
+                }
+            }
+
+            // Check notifications on load
+            function initNotifications() {
+                const email = localStorage.getItem('notificationEmail');
+                if (email) {
+                    // Request browser notification permission
+                    if ('Notification' in window && Notification.permission === 'default') {
+                        Notification.requestPermission();
+                    }
+                    // Check once on load
+                    checkAndNotify();
+                }
+            }
+
             // Reset to default data
             function resetToDefault() {
                 if (
@@ -1576,6 +1863,7 @@
             // Initialize
             loadFromStorage();
             renderTable();
+            initNotifications();
         </script>
     </body>
 </html>
