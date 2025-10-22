@@ -1,9 +1,9 @@
-            // EmailJS Configuration
-            const EMAILJS_CONFIG = {
-                publicKey: "961oUETjyu2aeS8UZ", // Your EmailJS Public Key
-                serviceId: "service_yc54ruc", // Gmail service
-                templateId: "template_0trbivj", // Task Deadline Reminder template
-            };
+// EmailJS Configuration
+const EMAILJS_CONFIG = {
+    publicKey: "961oUETjyu2aeS8UZ", // Your EmailJS Public Key
+    serviceId: "service_yc54ruc", // Gmail service
+    templateId: "template_0trbivj", // Task Deadline Reminder template
+};
 
 // Initialize EmailJS
 (function () {
@@ -819,6 +819,24 @@ Status: ${capitalizeFirst(t.status)}
     }
 }
 
+// Check if we should send email (prevent spam)
+function shouldSendEmail() {
+    const lastEmailSent = localStorage.getItem("lastEmailSent");
+    if (!lastEmailSent) return true;
+
+    const lastSentDate = new Date(lastEmailSent);
+    const now = new Date();
+    const hoursSinceLastEmail = (now - lastSentDate) / (1000 * 60 * 60);
+
+    // Only send email once every 24 hours
+    return hoursSinceLastEmail >= 24;
+}
+
+// Mark email as sent
+function markEmailSent() {
+    localStorage.setItem("lastEmailSent", new Date().toISOString());
+}
+
 // Check and notify about upcoming deadlines
 async function checkAndNotify() {
     const email = localStorage.getItem("notificationEmail");
@@ -861,10 +879,18 @@ async function checkAndNotify() {
             });
         }
 
-        // Send email notification
-        const emailSent = await sendEmailNotification(email, upcomingTasks);
-        if (emailSent) {
-            console.log(`Email notification sent to ${email}`);
+        // Send email notification (but only once every 24 hours)
+        if (shouldSendEmail()) {
+            const emailSent = await sendEmailNotification(email, upcomingTasks);
+            if (emailSent) {
+                markEmailSent();
+                console.log(`Email notification sent to ${email}`);
+                console.log("Next email can be sent in 24 hours");
+            }
+        } else {
+            const lastSent = new Date(localStorage.getItem("lastEmailSent"));
+            console.log(`Email already sent recently (last sent: ${lastSent.toLocaleString()})`);
+            console.log("Email notifications are limited to once every 24 hours to prevent spam");
         }
     }
 }
