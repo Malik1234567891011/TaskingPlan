@@ -4,6 +4,11 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Project Tasking Plan</title>
+        <!-- EmailJS SDK -->
+        <script
+            type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+        ></script>
         <style>
             * {
                 margin: 0;
@@ -628,7 +633,10 @@
             <div class="upcoming-section">
                 <div class="upcoming-header">
                     <h2>📅 Upcoming Deadlines</h2>
-                    <button class="btn btn-secondary btn-small" onclick="toggleEmailNotifications()">
+                    <button
+                        class="btn btn-secondary btn-small"
+                        onclick="toggleEmailNotifications()"
+                    >
                         🔔 Email Alerts
                     </button>
                 </div>
@@ -1043,6 +1051,23 @@
         </div>
 
         <script>
+            // EmailJS Configuration
+            // Replace these with your own EmailJS credentials from https://www.emailjs.com/
+            const EMAILJS_CONFIG = {
+                publicKey: "YOUR_PUBLIC_KEY", // Get from EmailJS Dashboard
+                serviceId: "YOUR_SERVICE_ID", // e.g., 'service_abc123'
+                templateId: "YOUR_TEMPLATE_ID", // e.g., 'template_xyz789'
+            };
+
+            // Initialize EmailJS
+            (function () {
+                if (EMAILJS_CONFIG.publicKey !== "YOUR_PUBLIC_KEY") {
+                    emailjs.init({
+                        publicKey: EMAILJS_CONFIG.publicKey,
+                    });
+                }
+            })();
+
             // Initial task data
             let tasks = [
                 {
@@ -1337,7 +1362,7 @@
 
             // Check if task is due soon (within 3 days)
             function isDueSoon(deadline, status) {
-                if (status === 'completed') return false;
+                if (status === "completed") return false;
                 const days = daysUntilDeadline(deadline);
                 return days >= 0 && days <= 3;
             }
@@ -1381,7 +1406,7 @@
                 document.getElementById("current-date").textContent =
                     "Status as of " +
                     today.toLocaleDateString("en-US", options);
-                
+
                 // Update upcoming tasks section
                 renderUpcomingTasks();
             }
@@ -1728,43 +1753,46 @@
 
             // Render upcoming tasks
             function renderUpcomingTasks() {
-                const upcomingContainer = document.getElementById("upcoming-tasks");
-                
+                const upcomingContainer =
+                    document.getElementById("upcoming-tasks");
+
                 // Get tasks that are not completed and sort by deadline
                 const upcomingTasks = tasks
-                    .filter(t => t.status !== 'completed')
-                    .map(t => ({
+                    .filter((t) => t.status !== "completed")
+                    .map((t) => ({
                         ...t,
-                        daysUntil: daysUntilDeadline(t.deadline)
+                        daysUntil: daysUntilDeadline(t.deadline),
                     }))
-                    .filter(t => t.daysUntil >= 0 && t.daysUntil <= 7) // Next 7 days
+                    .filter((t) => t.daysUntil >= 0 && t.daysUntil <= 7) // Next 7 days
                     .sort((a, b) => a.daysUntil - b.daysUntil);
 
                 if (upcomingTasks.length === 0) {
-                    upcomingContainer.innerHTML = '<p style="color: #999; text-align: center; padding: 20px;">No upcoming deadlines in the next 7 days! 🎉</p>';
+                    upcomingContainer.innerHTML =
+                        '<p style="color: #999; text-align: center; padding: 20px;">No upcoming deadlines in the next 7 days! 🎉</p>';
                     return;
                 }
 
-                upcomingContainer.innerHTML = upcomingTasks.map((task, index) => {
-                    const displayNumber = tasks.indexOf(task) + 1;
-                    let urgencyClass = 'soon';
-                    let daysText = '';
-                    
-                    if (task.daysUntil === 0) {
-                        urgencyClass = 'critical';
-                        daysText = 'Due Today!';
-                    } else if (task.daysUntil === 1) {
-                        urgencyClass = 'critical';
-                        daysText = 'Due Tomorrow';
-                    } else if (task.daysUntil <= 3) {
-                        urgencyClass = 'warning';
-                        daysText = `${task.daysUntil} days`;
-                    } else {
-                        urgencyClass = 'soon';
-                        daysText = `${task.daysUntil} days`;
-                    }
+                upcomingContainer.innerHTML = upcomingTasks
+                    .map((task, index) => {
+                        const displayNumber = tasks.indexOf(task) + 1;
+                        let urgencyClass = "soon";
+                        let daysText = "";
 
-                    return `
+                        if (task.daysUntil === 0) {
+                            urgencyClass = "critical";
+                            daysText = "Due Today!";
+                        } else if (task.daysUntil === 1) {
+                            urgencyClass = "critical";
+                            daysText = "Due Tomorrow";
+                        } else if (task.daysUntil <= 3) {
+                            urgencyClass = "warning";
+                            daysText = `${task.daysUntil} days`;
+                        } else {
+                            urgencyClass = "soon";
+                            daysText = `${task.daysUntil} days`;
+                        }
+
+                        return `
                         <div class="upcoming-item ${urgencyClass}">
                             <div class="upcoming-item-header">
                                 <span class="upcoming-item-id">Task #${displayNumber}</span>
@@ -1777,70 +1805,177 @@
                             </div>
                         </div>
                     `;
-                }).join('');
+                    })
+                    .join("");
             }
 
             // Email notification modal and functionality
             function toggleEmailNotifications() {
-                const email = localStorage.getItem('notificationEmail');
-                
+                const email = localStorage.getItem("notificationEmail");
+
                 if (email) {
-                    if (confirm(`Email alerts are currently set for: ${email}\n\nDo you want to remove email notifications?`)) {
-                        localStorage.removeItem('notificationEmail');
-                        alert('Email notifications disabled');
+                    if (
+                        confirm(
+                            `Email alerts are currently set for: ${email}\n\nDo you want to remove email notifications?`
+                        )
+                    ) {
+                        localStorage.removeItem("notificationEmail");
+                        alert("Email notifications disabled");
                     }
                 } else {
-                    const newEmail = prompt('Enter your email to receive deadline reminders:');
-                    if (newEmail && newEmail.includes('@')) {
-                        localStorage.setItem('notificationEmail', newEmail);
-                        alert(`Email notifications enabled for ${newEmail}\n\nNote: This stores your email locally. To enable actual email delivery, you can integrate with EmailJS or similar service.`);
-                        
-                        // Check for upcoming deadlines and show what would be sent
+                    const newEmail = prompt(
+                        "Enter your email to receive deadline reminders:"
+                    );
+                    if (newEmail && newEmail.includes("@")) {
+                        localStorage.setItem("notificationEmail", newEmail);
+
+                        // Check if EmailJS is configured
+                        if (EMAILJS_CONFIG.publicKey === "YOUR_PUBLIC_KEY") {
+                            alert(
+                                `Email stored: ${newEmail}\n\n⚠️ EmailJS not configured yet!\n\nTo enable email delivery:\n1. Go to https://www.emailjs.com/\n2. Create free account\n3. Add your credentials to the code\n\nFor now, you'll get browser notifications only.`
+                            );
+                        } else {
+                            alert(
+                                `Email notifications enabled for ${newEmail}\n\nYou'll receive emails when tasks are due soon!`
+                            );
+                        }
+
+                        // Check for upcoming deadlines and send notification
                         checkAndNotify();
                     } else if (newEmail) {
-                        alert('Please enter a valid email address');
+                        alert("Please enter a valid email address");
                     }
                 }
             }
 
+            // Send email via EmailJS
+            async function sendEmailNotification(email, upcomingTasks) {
+                // Check if EmailJS is configured
+                if (EMAILJS_CONFIG.publicKey === "YOUR_PUBLIC_KEY") {
+                    console.log("EmailJS not configured. Skipping email send.");
+                    return false;
+                }
+
+                try {
+                    // Format task list for email
+                    const taskList = upcomingTasks
+                        .map((t) => {
+                            const displayNumber = tasks.indexOf(t) + 1;
+                            const daysText =
+                                t.daysUntil === 0
+                                    ? "TODAY"
+                                    : t.daysUntil === 1
+                                    ? "TOMORROW"
+                                    : `in ${t.daysUntil} days`;
+                            return `
+Task #${displayNumber}: ${t.desc.substring(0, 100)}
+Assigned to: ${capitalizeFirst(t.assignee)}
+Deadline: ${formatDate(t.deadline)} (${daysText})
+Status: ${capitalizeFirst(t.status)}
+---`;
+                        })
+                        .join("\n\n");
+
+                    // Email template parameters
+                    const templateParams = {
+                        to_email: email,
+                        to_name: email.split("@")[0],
+                        task_count: upcomingTasks.length,
+                        task_list: taskList,
+                        urgent_count: upcomingTasks.filter(
+                            (t) => t.daysUntil <= 1
+                        ).length,
+                        current_date: new Date().toLocaleDateString("en-US", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                        }),
+                    };
+
+                    // Send email
+                    const response = await emailjs.send(
+                        EMAILJS_CONFIG.serviceId,
+                        EMAILJS_CONFIG.templateId,
+                        templateParams
+                    );
+
+                    console.log(
+                        "Email sent successfully!",
+                        response.status,
+                        response.text
+                    );
+                    return true;
+                } catch (error) {
+                    console.error("Failed to send email:", error);
+                    return false;
+                }
+            }
+
             // Check and notify about upcoming deadlines
-            function checkAndNotify() {
-                const email = localStorage.getItem('notificationEmail');
+            async function checkAndNotify() {
+                const email = localStorage.getItem("notificationEmail");
                 if (!email) return;
 
                 const upcomingTasks = tasks
-                    .filter(t => t.status !== 'completed')
-                    .map(t => ({
+                    .filter((t) => t.status !== "completed")
+                    .map((t) => ({
                         ...t,
-                        daysUntil: daysUntilDeadline(t.deadline)
+                        daysUntil: daysUntilDeadline(t.deadline),
                     }))
-                    .filter(t => t.daysUntil >= 0 && t.daysUntil <= 3);
+                    .filter((t) => t.daysUntil >= 0 && t.daysUntil <= 3);
 
                 if (upcomingTasks.length > 0) {
-                    const message = `You have ${upcomingTasks.length} task(s) due soon:\n\n` +
-                        upcomingTasks.map(t => {
-                            const displayNumber = tasks.indexOf(t) + 1;
-                            const daysText = t.daysUntil === 0 ? 'TODAY' : t.daysUntil === 1 ? 'TOMORROW' : `in ${t.daysUntil} days`;
-                            return `• Task #${displayNumber}: Due ${daysText}\n  ${t.desc.substring(0, 60)}...`;
-                        }).join('\n\n');
-                    
-                    console.log('Upcoming deadline reminder:', message);
+                    const message =
+                        `You have ${upcomingTasks.length} task(s) due soon:\n\n` +
+                        upcomingTasks
+                            .map((t) => {
+                                const displayNumber = tasks.indexOf(t) + 1;
+                                const daysText =
+                                    t.daysUntil === 0
+                                        ? "TODAY"
+                                        : t.daysUntil === 1
+                                        ? "TOMORROW"
+                                        : `in ${t.daysUntil} days`;
+                                return `• Task #${displayNumber}: Due ${daysText}\n  ${t.desc.substring(
+                                    0,
+                                    60
+                                )}...`;
+                            })
+                            .join("\n\n");
+
+                    console.log("Upcoming deadline reminder:", message);
+
                     // Browser notification (if user has granted permission)
-                    if ('Notification' in window && Notification.permission === 'granted') {
-                        new Notification('Task Deadlines Approaching!', {
+                    if (
+                        "Notification" in window &&
+                        Notification.permission === "granted"
+                    ) {
+                        new Notification("Task Deadlines Approaching!", {
                             body: `You have ${upcomingTasks.length} task(s) due soon. Check your task manager!`,
-                            icon: '📋'
+                            icon: "📋",
                         });
+                    }
+
+                    // Send email notification
+                    const emailSent = await sendEmailNotification(
+                        email,
+                        upcomingTasks
+                    );
+                    if (emailSent) {
+                        console.log(`Email notification sent to ${email}`);
                     }
                 }
             }
 
             // Check notifications on load
             function initNotifications() {
-                const email = localStorage.getItem('notificationEmail');
+                const email = localStorage.getItem("notificationEmail");
                 if (email) {
                     // Request browser notification permission
-                    if ('Notification' in window && Notification.permission === 'default') {
+                    if (
+                        "Notification" in window &&
+                        Notification.permission === "default"
+                    ) {
                         Notification.requestPermission();
                     }
                     // Check once on load
