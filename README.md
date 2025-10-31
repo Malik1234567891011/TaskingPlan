@@ -92,9 +92,21 @@ Modify the CSS color schemes for assignees:
 - Touch-friendly controls
 - Optimized for phones and tablets
 
+## 📁 Project Structure
+```
+TaskingPlan/
+├── index.html          # Main HTML file
+├── taskingPlan.html    # Alternative entry point
+├── styles.css          # All styling (black/grey theme)
+├── app.js              # All JavaScript logic
+├── README.md           # Documentation
+└── EMAILJS_SETUP.md    # Email notification setup guide
+```
+
 ## 🔧 Technical Details
 - **No dependencies** - Pure vanilla JavaScript
 - **No build process** - Just open and run
+- **Modular structure** - Separated HTML, CSS, and JS
 - **No backend** - All data stored locally
 - **Privacy-first** - Your data never leaves your browser
 

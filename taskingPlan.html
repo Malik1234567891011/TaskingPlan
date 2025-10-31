@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project Tasking Plan</title>
-        
+        <title>Project Tasking Plan</title>
+
         <!-- External CSS -->
         <link rel="stylesheet" href="styles.css" />
-        
+
         <!-- EmailJS SDK -->
         <script
             type="text/javascript"
             src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
         ></script>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
                 <div class="header-left">
-            <h1>📋 Project Tasking Plan</h1>
+                    <h1>📋 Project Tasking Plan</h1>
                     <p id="current-date">Status as of October 21, 2025</p>
                 </div>
                 <div class="header-actions">
@@ -39,25 +39,25 @@
                         🔄 Reset Hours
                     </button>
                 </div>
-        </div>
+            </div>
 
             <div class="stats" id="stats">
-            <div class="stat-card">
+                <div class="stat-card">
                     <h3 id="total-tasks">24</h3>
-                <p>Total Tasks</p>
-            </div>
-            <div class="stat-card">
+                    <p>Total Tasks</p>
+                </div>
+                <div class="stat-card">
                     <h3 id="completed-tasks">7</h3>
-                <p>Completed</p>
-            </div>
-            <div class="stat-card">
+                    <p>Completed</p>
+                </div>
+                <div class="stat-card">
                     <h3 id="in-progress-tasks">3</h3>
-                <p>In Progress</p>
-            </div>
-            <div class="stat-card">
+                    <p>In Progress</p>
+                </div>
+                <div class="stat-card">
                     <h3 id="overdue-tasks">2</h3>
-                <p>Overdue</p>
-            </div>
+                    <p>Overdue</p>
+                </div>
                 <div class="stat-card stat-due-soon">
                     <h3 id="due-soon-tasks">0</h3>
                     <p>Due Soon (3 days)</p>
@@ -82,49 +82,49 @@
                 <div id="upcoming-tasks" class="upcoming-list">
                     <!-- Will be populated by JS -->
                 </div>
-        </div>
+            </div>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
                             <th style="width: 40px">⠿</th>
-                        <th>#</th>
-                        <th>Task Description</th>
-                        <th>Dependencies</th>
-                        <th>Assigned To</th>
+                            <th>#</th>
+                            <th>Task Description</th>
+                            <th>Dependencies</th>
+                            <th>Assigned To</th>
                             <th>LOE</th>
-                        <th>Deadline</th>
-                        <th>Status</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
                             <th>Actions</th>
-                    </tr>
-                </thead>
+                        </tr>
+                    </thead>
                     <tbody id="task-table">
                         <!-- Will be populated by JS -->
-                </tbody>
-            </table>
-        </div>
+                    </tbody>
+                </table>
+            </div>
 
-        <div class="legend">
-            <strong>Status Legend:</strong>
-            <div class="legend-item">
+            <div class="legend">
+                <strong>Status Legend:</strong>
+                <div class="legend-item">
                     <div class="legend-dot" style="background: #c8e6c9"></div>
-                <span>Completed</span>
-            </div>
-            <div class="legend-item">
+                    <span>Completed</span>
+                </div>
+                <div class="legend-item">
                     <div class="legend-dot" style="background: #fff9c4"></div>
-                <span>In Progress</span>
-            </div>
-            <div class="legend-item">
+                    <span>In Progress</span>
+                </div>
+                <div class="legend-item">
                     <div class="legend-dot" style="background: #e0e0e0"></div>
-                <span>Pending</span>
-            </div>
-            <div class="legend-item">
+                    <span>Pending</span>
+                </div>
+                <div class="legend-item">
                     <div class="legend-dot" style="background: #ffcdd2"></div>
-                <span>Overdue</span>
+                    <span>Overdue</span>
+                </div>
             </div>
         </div>
-    </div>
 
         <!-- Import/Export Modal -->
         <div id="import-modal" class="modal">
@@ -150,5 +150,5 @@
 
         <!-- External JavaScript -->
         <script src="app.js"></script>
-</body>
+    </body>
 </html>

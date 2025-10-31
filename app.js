@@ -350,7 +350,10 @@ function renderTable() {
     const tbody = document.getElementById("task-table");
     tbody.innerHTML = "";
 
-    tasks.forEach((task, index) => {
+    // Sort tasks by deadline before rendering
+    const sortedTasks = [...tasks].sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+
+    sortedTasks.forEach((task, index) => {
         const overdue = isOverdue(task.deadline, task.status);
         const displayStatus =
             overdue && task.status !== "completed" ? "overdue" : task.status;
@@ -388,8 +391,7 @@ function renderTable() {
             task.id
         })">${capitalizeFirst(task.assignee)}</span></td>
                         <td class="loe" ondblclick="editLOE(${task.id})">
-                            ${task.days}d
-                            <div class="hours-estimate">${task.hours}h</div>
+                            ${task.hours}h
                         </td>
                         <td class="deadline ${
                             overdue && task.status !== "completed"
@@ -524,12 +526,8 @@ function editLOE(taskId) {
     const task = tasks.find((t) => t.id === taskId);
     if (!task) return;
 
-    const newDays = prompt("Enter days:", task.days);
     const newHours = prompt("Enter hours:", task.hours);
 
-    if (newDays !== null && !isNaN(newDays)) {
-        task.days = parseInt(newDays);
-    }
     if (newHours !== null && !isNaN(newHours)) {
         task.hours = parseInt(newHours);
     }
@@ -564,11 +562,6 @@ function editTask(taskId) {
     const newDeps = prompt("Dependencies:", task.deps);
     if (newDeps !== null) {
         task.deps = newDeps.trim() || "—";
-    }
-
-    const newDays = prompt("Days:", task.days);
-    if (newDays !== null && !isNaN(newDays)) {
-        task.days = parseInt(newDays);
     }
 
     const newHours = prompt("Hours:", task.hours);
@@ -655,7 +648,7 @@ function addNewTask() {
         desc: desc.trim(),
         deps: "—",
         assignee: "both",
-        days: 1,
+        days: 0,
         hours: 8,
         deadline: new Date().toISOString().split("T")[0],
         status: "pending",
@@ -889,8 +882,12 @@ async function checkAndNotify() {
             }
         } else {
             const lastSent = new Date(localStorage.getItem("lastEmailSent"));
-            console.log(`Email already sent recently (last sent: ${lastSent.toLocaleString()})`);
-            console.log("Email notifications are limited to once every 24 hours to prevent spam");
+            console.log(
+                `Email already sent recently (last sent: ${lastSent.toLocaleString()})`
+            );
+            console.log(
+                "Email notifications are limited to once every 24 hours to prevent spam"
+            );
         }
     }
 }

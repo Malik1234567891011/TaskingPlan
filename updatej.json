@@ -1,0 +1,452 @@
+[
+    {
+        "id": 100,
+        "desc": "Decide repo layout (single repo with /app and /site) and default branch name; document in README.",
+        "deps": "—",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-24",
+        "status": "completed"
+    },
+    {
+        "id": 101,
+        "desc": "Create repo + file structure: /app (Android), /site (landing), /.github, /docs; add initial README and LICENSE.",
+        "deps": "1",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-24",
+        "status": "completed"
+    },
+    {
+        "id": 110,
+        "desc": "Landing page brief: audience, value prop, 1-sentence elevator pitch, call-to-action, tone, color palette.",
+        "deps": "1",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-25",
+        "status": "completed"
+    },
+    {
+        "id": 103,
+        "desc": "Create CONTRIBUTING.md with branch naming, commit prefix, PR template, and code review checklist.",
+        "deps": "2",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-25",
+        "status": "completed"
+    },
+    {
+        "id": 102,
+        "desc": "Set Android app module skeleton: Gradle settings, app module, Compose Material3, min/target SDK; compile runs.",
+        "deps": "2",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-10-26",
+        "status": "completed"
+    },
+    {
+        "id": 111,
+        "desc": "Wireframe the landing page (mobile-first): hero, features, screenshots, FAQ, email capture; export to /docs.",
+        "deps": "3",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-26",
+        "status": "completed"
+    },
+    {
+        "id": 120,
+        "desc": "Define data model v1 in /docs (ERD): UserProfile, Restaurant, MenuCapture, MenuItem; review names + types.",
+        "deps": "5",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-27",
+        "status": "completed"
+    },
+    {
+        "id": 112,
+        "desc": "Copywriting v1: headline, subhead, feature bullets, CTA labels, meta title/description.",
+        "deps": "6",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-27",
+        "status": "completed"
+    },
+    {
+        "id": 104,
+        "desc": "Static analysis bootstrap: ktlint config, Gradle tasks, pre-push hook instructions.",
+        "deps": "5",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-27",
+        "status": "completed"
+    },
+    {
+        "id": 113,
+        "desc": "Choose site stack (Vite + React + TS) and initialize /site with routing and basic layout.",
+        "deps": "6",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-28",
+        "status": "completed"
+    },
+    {
+        "id": 105,
+        "desc": "CI quickstart: GitHub Actions to build + lint Android app on PRs, add status badges.",
+        "deps": "9",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-28",
+        "status": "completed"
+    },
+    {
+        "id": 121,
+        "desc": "Create Room entities + type converters; write DAOs (minimal queries) for each entity.",
+        "deps": "7",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-10-29",
+        "status": "completed"
+    },
+    {
+        "id": 122,
+        "desc": "Seed/demo data script (Dev only): insert few restaurants + sample menus; add buildType guard.",
+        "deps": "12",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-30",
+        "status": "completed"
+    },
+    {
+        "id": 114,
+        "desc": "Implement landing page UI from wireframe: hero, features, screenshots section, FAQ, footer.",
+        "deps": "8, 10",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 3,
+        "deadline": "2025-10-30",
+        "status": "completed"
+    },
+    {
+        "id": 140,
+        "desc": "Bottom navigation with tabs (Scan, Menu, Profile); create NavHost + start destinations.",
+        "deps": "5",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-30",
+        "status": "completed"
+    },
+    {
+        "id": 115,
+        "desc": "Add responsiveness + accessibility: headings hierarchy, alt text, focus states, keyboard nav.",
+        "deps": "14",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-10-31",
+        "status": "in-progress"
+    },
+    {
+        "id": 123,
+        "desc": "Repository layer skeleton: suspend functions, error wrapping, basic unit tests.",
+        "deps": "12",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-01",
+        "status": "pending"
+    },
+    {
+        "id": 141,
+        "desc": "Deep link to open a saved menu by ID; verify back-stack behavior.",
+        "deps": "12, 15",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-01",
+        "status": "pending"
+    },
+    {
+        "id": 116,
+        "desc": "Add analytics + email capture form (stub); basic SEO (meta, OG tags, sitemap, robots).",
+        "deps": "14",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-01",
+        "status": "pending"
+    },
+    {
+        "id": 130,
+        "desc": "Onboarding flow shell: navigation route, scaffold, state holder.",
+        "deps": "5, 17",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-02",
+        "status": "pending"
+    },
+    {
+        "id": 150,
+        "desc": "Image picker + camera permission flow; handle EXIF orientation.",
+        "deps": "15",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-02",
+        "status": "pending"
+    },
+    {
+        "id": 117,
+        "desc": "Deploy landing page (e.g., Vercel/Netlify); set custom domain; smoke-test on mobile.",
+        "deps": "16, 19",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-02",
+        "status": "pending"
+    },
+    {
+        "id": 118,
+        "desc": "Landing page review + polish pass: copy edits, image compression, performance check (LCP/CLS).",
+        "deps": "22",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-03",
+        "status": "pending"
+    },
+    {
+        "id": 131,
+        "desc": "Language selection screen with validation; persist to Room.",
+        "deps": "12, 20",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-03",
+        "status": "pending"
+    },
+    {
+        "id": 132,
+        "desc": "Allergy & preference chips with multi-select, dedupe, and persistence.",
+        "deps": "24",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-04",
+        "status": "pending"
+    },
+    {
+        "id": 151,
+        "desc": "Integrate OCR library; return raw text blocks + bounding boxes; map error codes.",
+        "deps": "21",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-04",
+        "status": "pending"
+    },
+    {
+        "id": 160,
+        "desc": "Translation adapter: detect target vs source language; translate title/description when needed.",
+        "deps": "26",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-06",
+        "status": "pending"
+    },
+    {
+        "id": 161,
+        "desc": "Store both original and translated fields; UI toggle state persisted per menu.",
+        "deps": "12, 27",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-07",
+        "status": "pending"
+    },
+    {
+        "id": 210,
+        "desc": "Prepare 8–10 diverse menu fixtures (photo/scan/foreign language); log failures with example images.",
+        "deps": "26, 27",
+        "assignee": "both",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-08",
+        "status": "pending"
+    },
+    {
+        "id": 170,
+        "desc": "Tokenization pipeline; segment title/desc/price; extract candidates.",
+        "deps": "26, 28",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-09",
+        "status": "pending"
+    },
+    {
+        "id": 171,
+        "desc": "Synonym map + family mapping (tree nut, shellfish, etc.); unit test fixtures.",
+        "deps": "30",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-11",
+        "status": "pending"
+    },
+    {
+        "id": 180,
+        "desc": "Pure function for Red/Yellow/Green with precedence and reason codes; table-driven tests.",
+        "deps": "31",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-13",
+        "status": "pending"
+    },
+    {
+        "id": 190,
+        "desc": "Detailed Menu screen layout: list, cards with title/price/description, risk badge.",
+        "deps": "32",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-15",
+        "status": "pending"
+    },
+    {
+        "id": 191,
+        "desc": "\"Why?\" bottom sheet using evidence list from classification; copy strings.",
+        "deps": "33",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-16",
+        "status": "pending"
+    },
+    {
+        "id": 192,
+        "desc": "Saved Menus grid list with quick counts and open-on-click.",
+        "deps": "12, 15",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-17",
+        "status": "pending"
+    },
+    {
+        "id": 211,
+        "desc": "End-to-end smoke: pick image → OCR → translate → parse → classify → display; note timings.",
+        "deps": "29, 34",
+        "assignee": "both",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-17",
+        "status": "pending"
+    },
+    {
+        "id": 193,
+        "desc": "Profile screen: edit language and chips, dedupe, persist to Room.",
+        "deps": "25",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-18",
+        "status": "pending"
+    },
+    {
+        "id": 200,
+        "desc": "Error taxonomy mapping to user-friendly messages; loading/progress and retry flows.",
+        "deps": "26, 30, 33",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-18",
+        "status": "pending"
+    },
+    {
+        "id": 201,
+        "desc": "Accessibility pass: content descriptions, focus order, touch targets, color+icon+text redundancy.",
+        "deps": "33, 37",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-19",
+        "status": "pending"
+    },
+    {
+        "id": 212,
+        "desc": "Offline-first checks: airplane mode behavior; cached translation; saved menus viewable.",
+        "deps": "36",
+        "assignee": "malik",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-19",
+        "status": "pending"
+    },
+    {
+        "id": 220,
+        "desc": "Image preprocessing (rotate/auto-contrast); Room query tuning; jank fixes on long lists.",
+        "deps": "36",
+        "assignee": "muhammad",
+        "days": 0,
+        "hours": 2,
+        "deadline": "2025-11-20",
+        "status": "pending"
+    },
+    {
+        "id": 221,
+        "desc": "Determinism check: classification stable across repeated runs and devices.",
+        "deps": "41",
+        "assignee": "both",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-21",
+        "status": "pending"
+    },
+    {
+        "id": 230,
+        "desc": "README updates (screens, architecture diagram); short screen recordings for main flows.",
+        "deps": "42",
+        "assignee": "both",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-11-24",
+        "status": "pending"
+    },
+    {
+        "id": 231,
+        "desc": "Generate signed release APK; install on two physical devices; time full demo flow.",
+        "deps": "43",
+        "assignee": "both",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-12-02",
+        "status": "pending"
+    },
+    {
+        "id": 232,
+        "desc": "Final demo checklist, backup device, extra APK on USB; finalize speaking parts.",
+        "deps": "44",
+        "assignee": "both",
+        "days": 0,
+        "hours": 1,
+        "deadline": "2025-12-05",
+        "status": "pending"
+    }
+]
