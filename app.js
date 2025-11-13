@@ -14,8 +14,182 @@ const EMAILJS_CONFIG = {
     }
 })();
 
+// Sprint end dates mapping
+const SPRINT_END_DATES = {
+    1: "2025-10-08",
+    2: "2025-10-17",
+    3: "2025-10-31",
+    4: "2025-11-14",
+    5: "2025-11-28",
+    6: "2025-12-05",
+};
+
+// Calculate sprint start date (assume 2-week sprints, start = end - 13 days)
+function getSprintStartDate(sprintNum) {
+    if (!SPRINT_END_DATES[sprintNum]) return "";
+    const endDate = new Date(SPRINT_END_DATES[sprintNum]);
+    endDate.setDate(endDate.getDate() - 13); // 2 weeks = 14 days, so start is 13 days before
+    return endDate.toISOString().split("T")[0];
+}
+
 // Initial task data
 let tasks = [
+    // Sprint 1: Setup team practices and apply repository management practices (Oct 1-8)
+    {
+        id: -10,
+        desc: "Define team decision-making framework: Establish how team makes decisions, define team roles and role rotation plan, establish team norms and communication protocols.",
+        deps: "—",
+        assignee: "both",
+        days: 1,
+        hours: 3,
+        deadline: "2025-10-02",
+        sprint: 1,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(1),
+        actualHours: null,
+    },
+    {
+        id: -9,
+        desc: "Set up branch management: Use branch management techniques to separate developer efforts and separate requirement tasks. Create branch naming conventions and workflow.",
+        deps: "1.1",
+        assignee: "both",
+        days: 1,
+        hours: 2,
+        deadline: "2025-10-03",
+        sprint: 1,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(1),
+        actualHours: null,
+    },
+    {
+        id: -8,
+        desc: "Enforce pull requests to main branch: Set up pull request requirements to enforce clean, linear history. Configure branch protection rules and PR review process (continuous integration).",
+        deps: "1.2",
+        assignee: "both",
+        days: 1,
+        hours: 2,
+        deadline: "2025-10-04",
+        sprint: 1,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(1),
+        actualHours: null,
+    },
+    {
+        id: -7,
+        desc: "Configure Android linting/building tools: Set up Android linting and building tools to enforce each release proven to meet defined build requirements (continuous deployment).",
+        deps: "1.3",
+        assignee: "both",
+        days: 1,
+        hours: 3,
+        deadline: "2025-10-05",
+        sprint: 1,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(1),
+        actualHours: null,
+    },
+    {
+        id: -6,
+        desc: "Set up semantic versioning and releases: Create releases from passing, approved and reviewed pull requests pushes to main. Establish semantic versioning scheme and release process.",
+        deps: "1.4",
+        assignee: "both",
+        days: 1,
+        hours: 2,
+        deadline: "2025-10-08",
+        sprint: 1,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(1),
+        actualHours: null,
+    },
+    // Sprint 2: Propose and scope your project (Oct 9-17)
+    {
+        id: -5,
+        desc: "Requirements analysis: Determine what exactly your project is for and what it will be. Document project purpose, target users, and core objectives.",
+        deps: "—",
+        assignee: "both",
+        days: 2,
+        hours: 6,
+        deadline: "2025-10-11",
+        sprint: 2,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(2),
+        actualHours: null,
+    },
+    {
+        id: -4,
+        desc: "Feature planning and roadmap: Determine what features to implement, publish a road map for implementing them. Prioritize features and create timeline.",
+        deps: "2.1",
+        assignee: "both",
+        days: 2,
+        hours: 6,
+        deadline: "2025-10-13",
+        sprint: 2,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(2),
+        actualHours: null,
+    },
+    {
+        id: -3,
+        desc: "Design and architecture planning: Design system architecture, plan for how features interact, and create technical design documents.",
+        deps: "2.2",
+        assignee: "both",
+        days: 2,
+        hours: 6,
+        deadline: "2025-10-15",
+        sprint: 2,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(2),
+        actualHours: null,
+    },
+    {
+        id: -2,
+        desc: "Risk analysis and contingency planning: Plan for contingencies and how they interact. Identify risks, mitigation strategies, and backup plans.",
+        deps: "2.3",
+        assignee: "both",
+        days: 1,
+        hours: 4,
+        deadline: "2025-10-17",
+        sprint: 2,
+        status: "completed",
+        group: "",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(2),
+        actualHours: null,
+    },
+    // Original tasks start here
     {
         id: 1,
         desc: "Verify project setup & tooling: Confirm repo structure, Gradle sync, Hilt configuration, Supabase SDK integration.",
@@ -24,7 +198,14 @@ let tasks = [
         days: 1,
         hours: 5,
         deadline: "2025-10-25",
+        sprint: 3,
         status: "completed",
+        group: "1",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(3),
+        actualHours: null,
     },
     {
         id: 2,
@@ -33,8 +214,15 @@ let tasks = [
         assignee: "muhammad",
         days: 1,
         hours: 4,
-        deadline: "2025-10-28",
+        deadline: "2025-10-26",
+        sprint: 3,
         status: "completed",
+        group: "2",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(3),
+        actualHours: null,
     },
     {
         id: 3,
@@ -44,439 +232,867 @@ let tasks = [
         days: 1,
         hours: 5,
         deadline: "2025-10-27",
+        sprint: 3,
         status: "completed",
+        group: "3",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(3),
+        actualHours: null,
     },
     {
         id: 4,
-        desc: "Setup Hilt DI modules: Create MenuPlusApplication with @HiltAndroidApp, implement AppModule, NetworkModule, DataStoreModule, RepositoryModule in di/",
+        desc: "Setup Hilt DI modules: Create MenuPlusApplication with @HiltAndroidApp, implement NetworkModule and RepositoryModule in di/",
         deps: "1",
         assignee: "muhammad",
         days: 1,
         hours: 4,
-        deadline: "2025-10-30",
-        status: "pending",
+        deadline: "2025-10-28",
+        sprint: 3,
+        status: "completed",
+        group: "4",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(3),
+        actualHours: null,
     },
     {
         id: 5,
-        desc: "Supabase client setup: Implement SupabaseClient in data/remote/supabase/, configure auth and database connections, create SupabaseAuthService with login/register/logout methods.",
+        desc: "Supabase client setup: Implement SupabaseClientProvider in data/remote/supabase/, configure auth with auto-refresh and database connections.",
         deps: "4",
         assignee: "muhammad",
-        days: 2,
-        hours: 12,
-        deadline: "2025-11-01",
-        status: "pending",
+        days: 1,
+        hours: 6,
+        deadline: "2025-10-29",
+        sprint: 3,
+        status: "completed",
+        group: "5",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(3),
+        actualHours: null,
     },
     {
         id: 6,
-        desc: "Auth DTOs and domain models: Create LoginRequestDto, RegisterRequestDto, AuthResponseDto in data/remote/dto/auth/, create User and UserProfile domain models in domain/model/",
+        desc: "Auth domain models: Create User and UserProfile domain models in domain/model/ with proper serialization.",
         deps: "5",
         assignee: "malik",
         days: 1,
-        hours: 5,
-        deadline: "2025-11-02",
-        status: "pending",
+        hours: 4,
+        deadline: "2025-10-30",
+        sprint: 3,
+        status: "completed",
+        group: "6",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(3),
+        actualHours: null,
     },
     {
         id: 7,
-        desc: "Auth repository layer: Implement AuthRepository interface and AuthRepositoryImpl in data/repository/auth/, integrate with SupabaseAuthService.",
-        deps: "5, 6",
+        desc: "Auth repository layer: Implement AuthRepository interface and AuthRepositoryImpl in data/repository/auth/, integrate with Supabase Auth service with Flow-based state observation.",
+        deps: "3.5, 3.6",
         assignee: "muhammad",
         days: 1,
-        hours: 4,
-        deadline: "2025-11-04",
-        status: "pending",
+        hours: 5,
+        deadline: "2025-10-31",
+        sprint: 3,
+        status: "completed",
+        group: "7",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(3),
+        actualHours: null,
     },
     {
         id: 8,
-        desc: "Auth use cases: Create LoginUseCase, RegisterUseCase, LogoutUseCase in domain/usecase/auth/ with proper error handling and validation.",
+        desc: "Auth use cases: Create LoginUseCase, RegisterUseCase, LogoutUseCase, ObserveAuthStateUseCase in domain/usecase/auth/ with proper error handling and validation.",
         deps: "7",
         assignee: "malik",
         days: 1,
         hours: 5,
-        deadline: "2025-11-04",
-        status: "pending",
+        deadline: "2025-11-01",
+        sprint: 4,
+        status: "completed",
+        group: "8",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 9,
         desc: "Login/Register screens with ViewModels: Implement LoginScreen, LoginViewModel, LoginUiState and RegisterScreen, RegisterViewModel, RegisterUiState in ui/screens/auth/",
-        deps: "8",
+        deps: "4.1",
         assignee: "muhammad",
         days: 2,
-        hours: 12,
-        deadline: "2025-11-06",
-        status: "pending",
+        hours: 10,
+        deadline: "2025-11-03",
+        sprint: 4,
+        status: "completed",
+        group: "9",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 10,
-        desc: "DataStore integration: Create PreferencesKeys, UserPreferencesDataSource, MenuPlusPreferences in data/local/datastore/ for storing user session and preferences.",
-        deps: "4",
+        desc: "App-level state management: Create MenuPlusAppViewModel with auth state observation, implement state-based navigation (Loading/NotAuthenticated/NeedsOnboarding/Authenticated).",
+        deps: "4.1, 4.2",
         assignee: "malik",
         days: 1,
         hours: 4,
-        deadline: "2025-11-05",
-        status: "pending",
+        deadline: "2025-11-04",
+        sprint: 4,
+        status: "completed",
+        group: "10",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 11,
-        desc: "User preferences repository: Create UserPreferencesRepository interface and implementation in data/repository/preferences/, integrate with DataStore.",
-        deps: "10",
+        desc: "Fix authentication flicker bug: Add Loading state as initial value in StateFlow to prevent Landing page flash on app restart.",
+        deps: "4.3",
         assignee: "malik",
-        days: 1,
-        hours: 5,
-        deadline: "2025-11-06",
-        status: "pending",
+        days: 0,
+        hours: 2,
+        deadline: "2025-11-04",
+        sprint: 4,
+        status: "completed",
+        group: "11",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 12,
-        desc: "Domain models for dietary profile: Create DietaryTag, RiskLevel, ScanStatus enums/sealed classes in domain/model/",
-        deps: "1",
+        desc: "Domain models for dietary profile: Create Language model in domain/model/, define list-based structure for allergies/restrictions/dislikes/preferences in UserProfile.",
+        deps: "6",
         assignee: "muhammad",
         days: 1,
-        hours: 4,
+        hours: 3,
         deadline: "2025-11-05",
-        status: "pending",
+        sprint: 4,
+        status: "completed",
+        group: "12",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 13,
-        desc: "Onboarding UI with ViewModel: Create OnboardingScreen, OnboardingViewModel, OnboardingUiState in ui/screens/onboarding/, implement language dropdown and color-coded tag chips (red/yellow/green).",
-        deps: "2, 9, 12",
-        assignee: "malik",
-        days: 2,
-        hours: 12,
-        deadline: "2025-11-08",
-        status: "pending",
-    },
-    {
-        id: 14,
-        desc: "User profile DTOs and Supabase service: Create UserProfileDto in data/remote/dto/profile/, implement SupabaseDataService with profile CRUD operations.",
-        deps: "5, 12",
-        assignee: "muhammad",
-        days: 1,
-        hours: 4,
-        deadline: "2025-11-07",
-        status: "pending",
-    },
-    {
-        id: 15,
-        desc: "User profile repository: Create UserProfileRepository interface and UserProfileRepositoryImpl in data/repository/profile/, with UserProfileMapper in data/mapper/",
-        deps: "14",
-        assignee: "malik",
-        days: 1,
-        hours: 4,
-        deadline: "2025-11-09",
-        status: "pending",
-    },
-    {
-        id: 16,
-        desc: "User profile use cases: Create GetUserProfileUseCase, UpdateUserProfileUseCase in domain/usecase/profile/, CompleteOnboardingUseCase in domain/usecase/onboarding/",
-        deps: "15",
+        desc: "User profile DTOs and Supabase integration: Create UserProfileDto, LanguageDto in data/remote/supabase/dto/, implement Supabase PostgREST queries for profile CRUD and language lookup.",
+        deps: "3.5, 4.5",
         assignee: "muhammad",
         days: 1,
         hours: 5,
-        deadline: "2025-11-09",
-        status: "pending",
+        deadline: "2025-11-06",
+        sprint: 4,
+        status: "completed",
+        group: "13",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
+    },
+    {
+        id: 14,
+        desc: "User profile repository: Create UserProfileRepository interface and UserProfileRepositoryImpl in data/repository/profile/ with DTO-to-domain mapping.",
+        deps: "4.6",
+        assignee: "malik",
+        days: 1,
+        hours: 4,
+        deadline: "2025-11-07",
+        sprint: 4,
+        status: "completed",
+        group: "14",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
+    },
+    {
+        id: 15,
+        desc: "User profile use cases: Create SaveUserProfileUseCase, GetAllLanguagesUseCase in domain/usecase/profile/ with validation and error handling.",
+        deps: "4.7",
+        assignee: "muhammad",
+        days: 1,
+        hours: 4,
+        deadline: "2025-11-08",
+        sprint: 4,
+        status: "completed",
+        group: "15",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
+    },
+    {
+        id: 16,
+        desc: "Onboarding UI with ViewModel: Create OnboardingScreen, OnboardingViewModel, OnboardingUiState in ui/screens/onboarding/, implement language dropdown and color-coded tag chips (red=allergies, orange=restrictions, yellow=dislikes, green=preferences).",
+        deps: "3.2, 4.2, 4.8",
+        assignee: "malik",
+        days: 2,
+        hours: 12,
+        deadline: "2025-11-10",
+        sprint: 4,
+        status: "completed",
+        group: "16",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 17,
-        desc: "Bottom navigation & shared components: Implement BottomNavigationBar in ui/navigation/, create TopBar, MenuPlusButton, MenuPlusTextField in ui/components/",
+        desc: "Bottom navigation & shared components: Implement BottomNavigationBar in ui/navigation/, create TopBar with settings icon in ui/components/",
         deps: "2",
         assignee: "malik",
         days: 1,
         hours: 4,
-        deadline: "2025-11-10",
-        status: "pending",
+        deadline: "2025-11-11",
+        sprint: 4,
+        status: "completed",
+        group: "17",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 18,
-        desc: "Domain models for menu: Create Restaurant, MenuCapture, MenuItem models in domain/model/, ensure proper relationships and data structures.",
-        deps: "12",
+        desc: "Google Cloud Vision API setup: Create VisionApi interface, VisionClient factory, VisionDtos (request/response models) in data/remote/vision/, configure Retrofit with API key interceptor and Moshi converter.",
+        deps: "4",
         assignee: "muhammad",
-        days: 0,
-        hours: 2,
-        deadline: "2025-11-06",
-        status: "pending",
+        days: 1,
+        hours: 5,
+        deadline: "2025-11-12",
+        sprint: 4,
+        status: "completed",
+        group: "18",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 19,
-        desc: "Menu DTOs: Create RestaurantDto, MenuCaptureDto, MenuItemDto in data/remote/dto/menu/",
-        deps: "18",
+        desc: "OCR repository layer: Create OcrRepository interface and OcrRepositoryImpl in data/repository/ocr/, implement DOCUMENT_TEXT_DETECTION feature for menu extraction.",
+        deps: "4.11",
         assignee: "malik",
-        days: 0,
-        hours: 2,
-        deadline: "2025-11-06",
-        status: "pending",
+        days: 1,
+        hours: 4,
+        deadline: "2025-11-13",
+        sprint: 4,
+        status: "completed",
+        group: "19",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 20,
-        desc: "Image picker + camera permission: Implement ImportMenuScreen, ImportMenuViewModel in ui/screens/import/, handle image selection, EXIF orientation, and restaurant name input.",
-        deps: "17",
+        desc: "Image encoding utilities: Implement ImageEncoding.uriToBase64() in util/ with proper EXIF orientation handling and Base64.NO_WRAP encoding.",
+        deps: "1",
         assignee: "muhammad",
         days: 0,
         hours: 3,
-        deadline: "2025-11-07",
-        status: "pending",
+        deadline: "2025-11-13",
+        sprint: 4,
+        status: "completed",
+        group: "20",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 21,
-        desc: "Gemini API client setup: Create GeminiApiClient and GeminiService in data/remote/gemini/, configure API client with proper authentication and request handling.",
-        deps: "4",
-        assignee: "muhammad",
-        days: 0,
-        hours: 3,
-        deadline: "2025-11-08",
-        status: "pending",
+        desc: "OCR screen implementation: Create OcrScreen, OcrViewModel, OcrUiState in ui/screens/ocr/, implement image picker with camera permission handling, show extracted text preview.",
+        deps: "4.10, 4.12, 4.13",
+        assignee: "malik",
+        days: 1,
+        hours: 6,
+        deadline: "2025-11-14",
+        sprint: 4,
+        status: "completed",
+        group: "21",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 22,
-        desc: "Gemini API integration: Construct multimodal request with menu image (Base64), user dietary profile JSON, structured prompt for extraction/translation/classification.",
-        deps: "21",
-        assignee: "muhammad",
+        desc: "Fix OCR silent failure bug: Add try-catch error handling in OcrViewModel to show user-friendly error message when image is unclear or OCR fails.",
+        deps: "4.14",
+        assignee: "malik",
         days: 0,
-        hours: 5,
-        deadline: "2025-11-10",
-        status: "pending",
+        hours: 2,
+        deadline: "2025-11-14",
+        sprint: 4,
+        status: "completed",
+        group: "22",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(4),
+        actualHours: null,
     },
     {
         id: 23,
-        desc: "Menu repository layer: Create MenuRepository interface and MenuRepositoryImpl in data/repository/menu/, implement MenuMapper in data/mapper/",
-        deps: "19, 22",
-        assignee: "malik",
-        days: 0,
+        desc: "Gemini API client setup: Create GeminiClient in data/remote/gemini/ using Firebase AI SDK, configure with gemini-2.5-flash model and GoogleAI backend.",
+        deps: "4",
+        assignee: "muhammad",
+        days: 1,
         hours: 4,
-        deadline: "2025-11-11",
-        status: "pending",
+        deadline: "2025-11-15",
+        sprint: 5,
+        status: "completed",
+        group: "23",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 24,
-        desc: "Menu use cases: Create ImportMenuUseCase, GetSavedMenusUseCase, DeleteMenuUseCase in domain/usecase/menu/",
-        deps: "23",
+        desc: "Gemini prompt engineering: Implement buildMenuAnalysisPrompt() with structured user profile (allergies/restrictions/dislikes/preferences), menu text input, RED/YELLOW/GREEN classification instructions, and === SECTION MARKERS === for parsing.",
+        deps: "5.1",
         assignee: "muhammad",
-        days: 0,
-        hours: 3,
-        deadline: "2025-11-12",
-        status: "pending",
+        days: 1,
+        hours: 6,
+        deadline: "2025-11-16",
+        sprint: 5,
+        status: "completed",
+        group: "24",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 25,
-        desc: "Risk classification utilities: Implement RiskClassifier, AllergenMatcher, DietaryValidator in domain/util/, with deterministic Red/Yellow/Green logic and unit tests.",
-        deps: "12",
+        desc: "Menu analysis use case: Create AnalyzeMenuUseCase in domain/usecase/menu/, orchestrate user profile fetch + Gemini API call with proper error handling.",
+        deps: "4.8, 5.2",
         assignee: "malik",
-        days: 0,
+        days: 1,
         hours: 4,
-        deadline: "2025-11-13",
-        status: "pending",
+        deadline: "2025-11-17",
+        sprint: 5,
+        status: "completed",
+        group: "25",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 26,
-        desc: "Scanning screen with animations: Create ScanningScreen, ScanningViewModel, ScanningUiState in ui/screens/scanning/, implement AnimatedMagnifyingGlass component.",
-        deps: "20, 22",
-        assignee: "malik",
-        days: 0,
-        hours: 3,
-        deadline: "2025-11-14",
+        desc: "Create test survey form: Design anonymous feedback form asking about product confirmation, specific features/issues, usability, general feedback, and form quality. Include version number and date fields. Target 10-minute completion time.",
+        deps: "—",
+        assignee: "both",
+        days: 1,
+        hours: 4,
+        deadline: "2025-11-18",
+        sprint: 5,
         status: "pending",
+        group: "26",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 27,
-        desc: "Store Gemini response in Supabase: Parse JSON response, create MenuCapture and MenuItem entities in Supabase with proper status transitions (NEW → PARSED).",
-        deps: "22, 24",
-        assignee: "muhammad",
-        days: 0,
-        hours: 4,
-        deadline: "2025-11-15",
-        status: "pending",
+        desc: "Import Menu screen - Loading state: Create ImportMenuScreen, ImportMenuViewModel, ImportMenuUiState in ui/screens/importmenu/, implement AnimatedMagnifyingGlass with infinite transition animations (float, scale, pulse).",
+        deps: "4.10, 5.3",
+        assignee: "malik",
+        days: 2,
+        hours: 8,
+        deadline: "2025-11-19",
+        sprint: 5,
+        status: "completed",
+        group: "27",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 28,
-        desc: "Early Gemini API test pass: Use 8–10 diverse menu fixtures (photo, scan, foreign language EN/FR/ES); validate JSON response structure, log failures.",
-        deps: "22, 27",
+        desc: "Initial prototype verification: Prepare partially functional early release build for Nov 21 deadline. Ensure testers can register, complete onboarding, capture menu image, and see AI analysis results (even if limited).",
+        deps: "5.5",
         assignee: "both",
-        days: 0,
-        hours: 3,
-        deadline: "2025-11-16",
+        days: 1,
+        hours: 6,
+        deadline: "2025-11-19",
+        sprint: 5,
         status: "pending",
+        group: "28",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 29,
-        desc: "Reusable UI components: Create DietaryTagChip, MenuItemCard, RestaurantCard, RiskBadge, LoadingIndicator, ErrorDialog, EmptyState in ui/components/",
-        deps: "17",
+        desc: "Import Menu screen - Results display: Implement TabRow with Safe Menu / Best Menu / Full Menu tabs, create separate content composables with color-coded cards (green/brown/grey).",
+        deps: "5.5",
         assignee: "malik",
-        days: 0,
-        hours: 4,
-        deadline: "2025-11-17",
-        status: "pending",
+        days: 1,
+        hours: 6,
+        deadline: "2025-11-20",
+        sprint: 5,
+        status: "completed",
+        group: "29",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 30,
-        desc: "Detailed Menu screen: Create DetailedMenuScreen, DetailedMenuViewModel, DetailedMenuUiState in ui/screens/menudetail/, implement LazyColumn with MenuItemCards, translated/original toggle, Menu Plus Suggestion section.",
-        deps: "25, 27, 29",
-        assignee: "muhammad",
-        days: 0,
-        hours: 5,
-        deadline: "2025-11-19",
+        desc: "Conduct preliminary testing: Send survey + early build to testers, give 5-minute walkthrough, collect preliminary feedback to revise survey form before Nov 21 submission.",
+        deps: "5.4, 5.6",
+        assignee: "both",
+        days: 1,
+        hours: 3,
+        deadline: "2025-11-20",
+        sprint: 5,
         status: "pending",
+        group: "30",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 31,
-        desc: "Saved Menu screen: Create SavedMenuScreen, SavedMenuViewModel, SavedMenuUiState in ui/screens/savedmenu/, implement grid layout with RestaurantCards showing allergen count indicators.",
-        deps: "24, 29",
-        assignee: "malik",
-        days: 0,
+        desc: "Gemini response parsing: Implement parseAnalysisResponse() in ImportMenuViewModel to extract content between === MARKERS ===, add fallback logic to show full response if parsing fails.",
+        deps: "5.7",
+        assignee: "muhammad",
+        days: 1,
         hours: 4,
-        deadline: "2025-11-20",
-        status: "pending",
+        deadline: "2025-11-21",
+        sprint: 5,
+        status: "completed",
+        group: "31",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 32,
-        desc: "Profile screen with edit capabilities: Create ProfileScreen, ProfileViewModel, ProfileUiState in ui/screens/profile/, implement language dropdown and tag editing (same UX as onboarding).",
-        deps: "13, 16, 29",
+        desc: "Fix Gemini parsing bug: Add try-catch with graceful degradation - if section parsing fails, return full response in all tabs instead of crashing.",
+        deps: "5.9",
         assignee: "muhammad",
         days: 0,
-        hours: 4,
+        hours: 2,
         deadline: "2025-11-21",
-        status: "pending",
+        sprint: 5,
+        status: "completed",
+        group: "32",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 33,
-        desc: "Live profile sync: When UserProfile changes in Supabase, re-evaluate all saved MenuItem entities; update risk classifications; show recomputed toast on menu load.",
-        deps: "25, 30, 32",
-        assignee: "malik",
+        desc: "Submit test survey (Nov 21 deadline - 2%): Submit finalized feedback form and collection of anonymous responses gathered. No analysis required at this stage.",
+        deps: "5.8",
+        assignee: "both",
         days: 0,
-        hours: 4,
-        deadline: "2025-11-22",
+        hours: 2,
+        deadline: "2025-11-21",
+        sprint: 5,
         status: "pending",
+        group: "33",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 34,
-        desc: "Utility classes: Create Constants, Result sealed class, UiText, NetworkMonitor, ImageUtils, ValidationUtils, Extensions in util/",
-        deps: "1",
-        assignee: "both",
+        desc: "Settings screen: Create SettingsScreen, SettingsViewModel in ui/screens/settings/ with logout functionality and back navigation.",
+        deps: "4.10",
+        assignee: "malik",
         days: 0,
         hours: 3,
-        deadline: "2025-11-23",
-        status: "pending",
+        deadline: "2025-11-22",
+        sprint: 5,
+        status: "completed",
+        group: "34",
+        parentId: null,
+        priority: "low",
+        requirement: "nice-to-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 35,
-        desc: "Error taxonomy & UX: Map Gemini API errors (network, rate limit, parsing failures) to user-friendly UiText messages; loading states with progress indicators; retry flows for failed scans.",
-        deps: "22, 26, 34",
-        assignee: "muhammad",
+        desc: "Profile screen placeholder: Create ProfileScreen.kt in ui/screens/profile/ with basic layout (future: implement profile editing).",
+        deps: "4.10",
+        assignee: "malik",
         days: 0,
-        hours: 4,
-        deadline: "2025-11-24",
-        status: "pending",
+        hours: 2,
+        deadline: "2025-11-22",
+        sprint: 5,
+        status: "completed",
+        group: "35",
+        parentId: null,
+        priority: "low",
+        requirement: "nice-to-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 36,
-        desc: "Accessibility pass: Content descriptions for all interactive elements, focus order, touch targets (48dp minimum), color+icon+text redundancy for risk indicators, contrast ratio checks.",
-        deps: "30, 31, 32",
-        assignee: "malik",
+        desc: "Saved Menu screen placeholder: Create SavedMenuScreen.kt in ui/screens/savedmenu/ with basic layout (future: implement menu history).",
+        deps: "4.10",
+        assignee: "muhammad",
         days: 0,
-        hours: 3,
-        deadline: "2025-11-25",
-        status: "pending",
+        hours: 2,
+        deadline: "2025-11-22",
+        sprint: 5,
+        status: "completed",
+        group: "36",
+        parentId: null,
+        priority: "low",
+        requirement: "nice-to-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 37,
-        desc: "Internal QA round: Test re-evaluation of saved menus after profile changes; verify offline behavior for cached data; validate menu load time under 15s for 1-page menu.",
-        deps: "All major features",
+        desc: "Utility classes: Create Result sealed class (Success/Error/Loading) in util/ for type-safe async operations.",
+        deps: "1",
         assignee: "both",
         days: 0,
-        hours: 6,
-        deadline: "2025-11-26",
-        status: "pending",
+        hours: 2,
+        deadline: "2025-11-23",
+        sprint: 5,
+        status: "completed",
+        group: "37",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 38,
-        desc: "Performance optimization: Image preprocessing (rotate/auto-contrast before Gemini upload), Supabase query optimization, jank fixes on long menu lists (LazyColumn optimization).",
-        deps: "37",
-        assignee: "muhammad",
-        days: 0,
+        desc: "Error handling UX: Implement error dialogs in all screens (auth, onboarding, OCR, import) with dismiss actions and user-friendly messages.",
+        deps: "5.15",
+        assignee: "malik",
+        days: 1,
         hours: 4,
-        deadline: "2025-11-27",
-        status: "pending",
+        deadline: "2025-11-24",
+        sprint: 5,
+        status: "completed",
+        group: "38",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 39,
-        desc: "Test fixtures & demo data: Curate final menu set (EN/FR/ES, fancy vs casual); create seed script for Supabase to load/delete fixtures quickly for demos.",
-        deps: "37",
-        assignee: "malik",
-        days: 0,
-        hours: 3,
-        deadline: "2025-11-28",
-        status: "pending",
+        desc: "Code documentation: Add comprehensive KDoc comments to all ViewModels, repositories, use cases, and API clients explaining purpose, parameters, and return types.",
+        deps: "All completed tasks",
+        assignee: "both",
+        days: 1,
+        hours: 6,
+        deadline: "2025-11-25",
+        sprint: 5,
+        status: "completed",
+        group: "39",
+        parentId: null,
+        priority: "low",
+        requirement: "nice-to-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 40,
-        desc: "Static analysis & CI: Add ktlint Gradle tasks; GitHub Action for build + lint on PRs; status badges in README.",
-        deps: "1",
-        assignee: "muhammad",
-        days: 0,
-        hours: 2,
-        deadline: "2025-11-28",
-        status: "pending",
+        desc: "Manual testing & bug fixes: Test complete user flow (register → onboarding → OCR → analysis), fix discovered issues (flicker bug, parsing fallback, OCR error handling).",
+        deps: "5.17",
+        assignee: "both",
+        days: 1,
+        hours: 8,
+        deadline: "2025-11-26",
+        sprint: 5,
+        status: "completed",
+        group: "40",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
     },
     {
         id: 41,
-        desc: "Offline-first validation: Ensure saved menus viewable with cached data; Gemini API calls gracefully handle offline state; DataStore persists user preferences.",
-        deps: "37",
+        desc: "README documentation: Update README.md with app description, tech stack, build instructions, team member info, and screenshots.",
+        deps: "5.18",
+        assignee: "malik",
+        days: 0,
+        hours: 3,
+        deadline: "2025-11-27",
+        sprint: 5,
+        status: "completed",
+        group: "41",
+        parentId: null,
+        priority: "low",
+        requirement: "nice-to-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
+    },
+    {
+        id: 42,
+        desc: "Presentation slides preparation: Create slides covering code structure, key issues encountered, risks addressed, and new risks identified based on current codebase analysis.",
+        deps: "5.19",
+        assignee: "both",
+        days: 1,
+        hours: 6,
+        deadline: "2025-11-27",
+        sprint: 5,
+        status: "in-progress",
+        group: "42",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(5),
+        actualHours: null,
+    },
+    {
+        id: 43,
+        desc: "Move API keys to secure storage: Remove hardcoded API keys from NetworkModule, implement BuildConfig or secure environment variable solution.",
+        deps: "4",
         assignee: "malik",
         days: 0,
         hours: 3,
         deadline: "2025-11-29",
+        sprint: 6,
         status: "pending",
-    },
-    {
-        id: 42,
-        desc: "Network monitoring: Implement NetworkMonitor utility for connectivity detection, integrate with repository layer for graceful error handling.",
-        deps: "34, 41",
-        assignee: "muhammad",
-        days: 0,
-        hours: 2,
-        deadline: "2025-11-29",
-        status: "pending",
-    },
-    {
-        id: 43,
-        desc: "Final QA: Regression testing from earlier bugs; run through rubric checklist; confirm deterministic risk classification on repeated inputs; verify all must-have features functional.",
-        deps: "37-42",
-        assignee: "both",
-        days: 0,
-        hours: 5,
-        deadline: "2025-12-01",
-        status: "pending",
+        group: "43",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(6),
+        actualHours: null,
     },
     {
         id: 44,
-        desc: "Documentation & slides: Update README with clean architecture diagram, screenshots, build instructions; Part A-D excerpts; record screen captures for main flows (onboarding → scan → detailed menu).",
-        deps: "43",
-        assignee: "both",
-        days: 0,
-        hours: 4,
-        deadline: "2025-12-02",
+        desc: "API rate limiting: Implement request counter for Vision API and Gemini API, add user quotas, display warning when approaching limits.",
+        deps: "4.12, 5.1",
+        assignee: "muhammad",
+        days: 1,
+        hours: 5,
+        deadline: "2025-11-30",
+        sprint: 6,
         status: "pending",
+        group: "44",
+        parentId: null,
+        priority: "medium",
+        requirement: "nice-to-have",
+        sprintStart: getSprintStartDate(6),
+        actualHours: null,
     },
     {
         id: 45,
-        desc: "Release build & dry-run: Generate signed release APK; install on two physical devices; time full demo flow (target <15s menu load); rehearse presentation sequence.",
-        deps: "44",
-        assignee: "both",
-        days: 0,
-        hours: 2,
-        deadline: "2025-12-04",
+        desc: "Add restaurant context input: Implement text field in ImportMenuScreen or OcrScreen for users to provide additional context (e.g., 'restaurant is halal-certified', 'chef's special contains shellfish').",
+        deps: "5.7",
+        assignee: "malik",
+        days: 1,
+        hours: 4,
+        deadline: "2025-12-01",
+        sprint: 6,
         status: "pending",
+        group: "45",
+        parentId: null,
+        priority: "low",
+        requirement: "nice-to-have",
+        sprintStart: getSprintStartDate(6),
+        actualHours: null,
     },
     {
         id: 46,
-        desc: "Presentation & final polish: Demo checklist, backup device, extra APK on USB; finalize speaking parts; verify all screens work flawlessly.",
-        deps: "45",
-        assignee: "both",
+        desc: "Implement API timeouts: Add 30-second timeout to Gemini API calls with retry logic and user-friendly timeout error message.",
+        deps: "5.1",
+        assignee: "muhammad",
         days: 0,
-        hours: 2,
-        deadline: "2025-12-05",
+        hours: 3,
+        deadline: "2025-12-01",
+        sprint: 6,
         status: "pending",
+        group: "46",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(6),
+        actualHours: null,
+    },
+    {
+        id: 47,
+        desc: "Profile editing: Implement full profile editing in ProfileScreen (update allergies/restrictions/dislikes/preferences/language after onboarding).",
+        deps: "4.8",
+        assignee: "malik",
+        days: 1,
+        hours: 6,
+        deadline: "2025-12-01",
+        sprint: 6,
+        status: "pending",
+        group: "47",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(6),
+        actualHours: null,
+    },
+    {
+        id: 48,
+        desc: "Performance optimization: Implement image compression before Base64 encoding, profile memory usage, optimize LazyColumn rendering for long menus.",
+        deps: "4.13, 5.7",
+        assignee: "muhammad",
+        days: 1,
+        hours: 6,
+        deadline: "2025-12-02",
+        sprint: 6,
+        status: "pending",
+        group: "48",
+        parentId: null,
+        priority: "medium",
+        requirement: "nice-to-have",
+        sprintStart: getSprintStartDate(6),
+        actualHours: null,
+    },
+    {
+        id: 49,
+        desc: "Accessibility improvements: Add content descriptions, ensure 48dp touch targets, verify color contrast ratios, test with TalkBack.",
+        deps: "All UI tasks",
+        assignee: "both",
+        days: 1,
+        hours: 5,
+        deadline: "2025-12-03",
+        sprint: 6,
+        status: "pending",
+        group: "49",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(6),
+        actualHours: null,
+    },
+    {
+        id: 50,
+        desc: "Final QA & demo rehearsal: Regression testing, rehearse demo flow, record screen captures for backup.",
+        deps: "5.20",
+        assignee: "both",
+        days: 2,
+        hours: 8,
+        deadline: "2025-12-05",
+        sprint: 6,
+        status: "pending",
+        group: "50",
+        parentId: null,
+        priority: "high",
+        requirement: "must-have",
+        sprintStart: getSprintStartDate(6),
+        actualHours: null,
     },
 ];
+
+// Migration function to add new fields to existing tasks
+function migrateTasks() {
+    tasks.forEach((task) => {
+        if (task.group === undefined) task.group = "";
+        if (task.parentId === undefined) task.parentId = null;
+        if (task.priority === undefined) task.priority = "medium";
+        if (task.requirement === undefined) task.requirement = "must-have";
+        if (task.sprintStart === undefined) task.sprintStart = "";
+        if (task.actualHours === undefined) task.actualHours = null;
+        if (task.sprint === undefined) task.sprint = null;
+    });
+}
+
+// Assign sprint-based group numbers: {sprint}.{task_number_within_sprint}
+// Reassigns all group numbers based on sprint and deadline order
+function assignSprintBasedGroups() {
+    // Group tasks by sprint
+    const tasksBySprint = {};
+    tasks.forEach((task) => {
+        const sprint = task.sprint || 0;
+        if (!tasksBySprint[sprint]) {
+            tasksBySprint[sprint] = [];
+        }
+        tasksBySprint[sprint].push(task);
+    });
+
+    // For each sprint, sort by deadline and assign group numbers
+    Object.keys(tasksBySprint)
+        .sort((a, b) => Number(a) - Number(b))
+        .forEach((sprint) => {
+            // Sort tasks within sprint by deadline (or id as fallback)
+            tasksBySprint[sprint].sort((a, b) => {
+                if (a.deadline && b.deadline) {
+                    return new Date(a.deadline) - new Date(b.deadline);
+                }
+                return a.id - b.id;
+            });
+
+            // Assign group numbers: sprint.taskNumber
+            tasksBySprint[sprint].forEach((task, index) => {
+                const taskNumber = index + 1;
+                task.group = `${sprint}.${taskNumber}`;
+            });
+        });
+}
+
+// Grouping state
+let isGroupingEnabled = false;
+
+// Sort state
+let currentSort = "group";
 
 // Load from localStorage if exists
 function loadFromStorage() {
@@ -484,9 +1100,14 @@ function loadFromStorage() {
     if (saved) {
         try {
             tasks = JSON.parse(saved);
+            migrateTasks(); // Migrate old tasks
+            assignSprintBasedGroups(); // Assign sprint-based group numbers
         } catch (e) {
             console.error("Error loading from storage:", e);
         }
+    } else {
+        migrateTasks(); // Migrate initial tasks
+        assignSprintBasedGroups(); // Assign sprint-based group numbers
     }
 }
 
@@ -565,15 +1186,231 @@ function updateStats() {
     renderUpcomingTasks();
 }
 
+// Compare group numbers (e.g., "1" vs "1.1" vs "2.3")
+function compareGroupNumbers(a, b) {
+    const parseGroup = (group) => {
+        if (!group) return [0];
+        return group.split(".").map(Number);
+    };
+
+    const aParts = parseGroup(a);
+    const bParts = parseGroup(b);
+    const maxLen = Math.max(aParts.length, bParts.length);
+
+    for (let i = 0; i < maxLen; i++) {
+        const aVal = aParts[i] || 0;
+        const bVal = bParts[i] || 0;
+        if (aVal !== bVal) {
+            return aVal - bVal;
+        }
+    }
+    return 0;
+}
+
+// Get tasks grouped by parent, sorted by group number
+function getGroupedTasks() {
+    if (!isGroupingEnabled) return tasks;
+
+    const groups = {};
+    const topLevel = [];
+
+    tasks.forEach((task) => {
+        if (task.parentId) {
+            if (!groups[task.parentId]) groups[task.parentId] = [];
+            groups[task.parentId].push(task);
+        } else {
+            topLevel.push(task);
+        }
+    });
+
+    // Sort top level by group number
+    topLevel.sort((a, b) => compareGroupNumbers(a.group || "", b.group || ""));
+
+    // Sort subtasks within each group
+    Object.keys(groups).forEach((parentId) => {
+        groups[parentId].sort((a, b) =>
+            compareGroupNumbers(a.group || "", b.group || "")
+        );
+    });
+
+    const result = [];
+    topLevel.forEach((task) => {
+        result.push(task);
+        if (groups[task.id]) {
+            groups[task.id].forEach((subtask) => result.push(subtask));
+        }
+    });
+    return result;
+}
+
+// Apply sorting
+function applySorting() {
+    const sortSelect = document.getElementById("sort-select");
+    currentSort = sortSelect.value;
+    renderTable();
+}
+
+// Sort tasks based on current sort
+function sortTasks(taskList) {
+    const sorted = [...taskList];
+
+    // If grouping is enabled, always sort by group first, then apply other sorting within groups
+    if (isGroupingEnabled) {
+        // Primary sort: by group number
+        sorted.sort((a, b) => {
+            const groupCompare = compareGroupNumbers(
+                a.group || "",
+                b.group || ""
+            );
+            if (groupCompare !== 0) return groupCompare;
+
+            // Within the same group, respect parent-child relationship
+            if (a.parentId && !b.parentId && a.parentId === b.id) return 1;
+            if (b.parentId && !a.parentId && b.parentId === a.id) return -1;
+            if (a.parentId === b.parentId) {
+                // Both have same parent or both are top-level
+                // Apply secondary sort based on currentSort
+                return applySecondarySort(a, b);
+            }
+            return 0;
+        });
+        return sorted;
+    }
+
+    // When not grouped, apply normal sorting
+    switch (currentSort) {
+        case "deadline":
+            sorted.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+            break;
+        case "priority":
+            const priorityOrder = { high: 3, medium: 2, low: 1 };
+            sorted.sort(
+                (a, b) =>
+                    (priorityOrder[b.priority] || 0) -
+                    (priorityOrder[a.priority] || 0)
+            );
+            break;
+        case "status":
+            const statusOrder = {
+                completed: 3,
+                "in-progress": 2,
+                pending: 1,
+                overdue: 0,
+            };
+            sorted.sort((a, b) => {
+                const statusA =
+                    a.status === "pending" && isOverdue(a.deadline, a.status)
+                        ? "overdue"
+                        : a.status;
+                const statusB =
+                    b.status === "pending" && isOverdue(b.deadline, b.status)
+                        ? "overdue"
+                        : b.status;
+                return (
+                    (statusOrder[statusB] || 0) - (statusOrder[statusA] || 0)
+                );
+            });
+            break;
+        case "assignee":
+            sorted.sort((a, b) => a.assignee.localeCompare(b.assignee));
+            break;
+        case "requirement":
+            sorted.sort((a, b) => a.requirement.localeCompare(b.requirement));
+            break;
+        case "sprintStart":
+            sorted.sort((a, b) => {
+                if (!a.sprintStart && !b.sprintStart) return 0;
+                if (!a.sprintStart) return 1;
+                if (!b.sprintStart) return -1;
+                return new Date(a.sprintStart) - new Date(b.sprintStart);
+            });
+            break;
+        case "id":
+            sorted.sort((a, b) => a.id - b.id);
+            break;
+        case "group":
+            // Sort by sprint first, then by group number
+            sorted.sort((a, b) => {
+                const sprintA = a.sprint || 0;
+                const sprintB = b.sprint || 0;
+                if (sprintA !== sprintB) {
+                    return sprintA - sprintB;
+                }
+                return compareGroupNumbers(a.group || "", b.group || "");
+            });
+            break;
+    }
+
+    return sorted;
+}
+
+// Apply secondary sorting within groups
+function applySecondarySort(a, b) {
+    switch (currentSort) {
+        case "deadline":
+            return new Date(a.deadline) - new Date(b.deadline);
+        case "priority":
+            const priorityOrder = { high: 3, medium: 2, low: 1 };
+            return (
+                (priorityOrder[b.priority] || 0) -
+                (priorityOrder[a.priority] || 0)
+            );
+        case "status":
+            const statusOrder = {
+                completed: 3,
+                "in-progress": 2,
+                pending: 1,
+                overdue: 0,
+            };
+            const statusA =
+                a.status === "pending" && isOverdue(a.deadline, a.status)
+                    ? "overdue"
+                    : a.status;
+            const statusB =
+                b.status === "pending" && isOverdue(b.deadline, b.status)
+                    ? "overdue"
+                    : b.status;
+            return (statusOrder[statusB] || 0) - (statusOrder[statusA] || 0);
+        case "assignee":
+            return a.assignee.localeCompare(b.assignee);
+        case "requirement":
+            return a.requirement.localeCompare(b.requirement);
+        case "sprintStart":
+            if (!a.sprintStart && !b.sprintStart) return 0;
+            if (!a.sprintStart) return 1;
+            if (!b.sprintStart) return -1;
+            return new Date(a.sprintStart) - new Date(b.sprintStart);
+        default:
+            return 0;
+    }
+}
+
+// Toggle grouping
+function toggleGrouping() {
+    isGroupingEnabled = !isGroupingEnabled;
+    const btn = document.getElementById("group-toggle");
+    btn.textContent = isGroupingEnabled ? "📊 Ungroup" : "📊 Toggle Grouping";
+
+    // When enabling grouping, default to group sort
+    if (isGroupingEnabled && currentSort !== "group") {
+        currentSort = "group";
+        const sortSelect = document.getElementById("sort-select");
+        if (sortSelect) sortSelect.value = "group";
+    }
+
+    renderTable();
+}
+
 // Render table
 function renderTable() {
     const tbody = document.getElementById("task-table");
     tbody.innerHTML = "";
 
-    // Sort tasks by deadline before rendering
-    const sortedTasks = [...tasks].sort(
-        (a, b) => new Date(a.deadline) - new Date(b.deadline)
-    );
+    // Get tasks (grouped or not)
+    let taskList = isGroupingEnabled ? getGroupedTasks() : tasks;
+
+    // Sort tasks
+    const sortedTasks = sortTasks(taskList);
 
     sortedTasks.forEach((task, index) => {
         const overdue = isOverdue(task.deadline, task.status);
@@ -583,6 +1420,9 @@ function renderTable() {
         const tr = document.createElement("tr");
         if (overdue && task.status !== "completed") {
             tr.classList.add("overdue-row");
+        }
+        if (task.parentId) {
+            tr.classList.add("subtask-row");
         }
 
         // Make row draggable
@@ -597,23 +1437,82 @@ function renderTable() {
         tr.addEventListener("dragend", handleDragEnd);
         tr.addEventListener("dragleave", handleDragLeave);
 
-        // Display position number (index + 1) instead of task.id
-        const displayNumber = index + 1;
+        // Display number - show group number if it exists, otherwise show sequential number
+        let displayNumber = task.group || (index + 1).toString();
+
+        // If no group number but has parent, try to generate one
+        if (!task.group && task.parentId) {
+            const parent = tasks.find((t) => t.id === task.parentId);
+            if (parent) {
+                const siblingSubtasks = tasks
+                    .filter((t) => t.parentId === task.parentId)
+                    .sort((a, b) => {
+                        // Sort by group if both have groups, otherwise by id
+                        if (a.group && b.group)
+                            return compareGroupNumbers(a.group, b.group);
+                        return a.id - b.id;
+                    });
+                const subtaskIndex =
+                    siblingSubtasks.findIndex((t) => t.id === task.id) + 1;
+                displayNumber = `${parent.group || parent.id}.${subtaskIndex}`;
+            }
+        }
+
+        // Format LOE / Actual
+        const loeDisplay =
+            task.status === "completed" && task.actualHours !== null
+                ? `${task.hours}h / ${task.actualHours}h`
+                : `${task.hours}h`;
+
+        // Format sprint start
+        const sprintStartDisplay = task.sprintStart
+            ? formatDate(task.sprintStart)
+            : "—";
 
         tr.innerHTML = `
                         <td class="drag-handle">⠿</td>
                         <td class="task-id">${displayNumber}</td>
-                        <td class="task-desc" ondblclick="editDesc(${
+                        <td class="task-desc ${
+                            task.parentId ? "subtask-desc" : ""
+                        }" ondblclick="editDesc(${task.id})">${task.desc}</td>
+                        <td class="group-cell" ondblclick="editGroup(${
                             task.id
-                        })">${task.desc}</td>
+                        })">
+                            ${
+                                task.group ||
+                                (task.parentId
+                                    ? `→ ${
+                                          tasks.find(
+                                              (t) => t.id === task.parentId
+                                          )?.group ||
+                                          tasks.find(
+                                              (t) => t.id === task.parentId
+                                          )?.id ||
+                                          ""
+                                      }`
+                                    : "—")
+                            }
+                        </td>
                         <td class="dependencies">${task.deps}</td>
                         <td><span class="assignee ${
                             task.assignee
                         }" onclick="cycleAssignee(${
             task.id
         })">${capitalizeFirst(task.assignee)}</span></td>
-                        <td class="loe" ondblclick="editLOE(${task.id})">
-                            ${task.hours}h
+                        <td><span class="priority priority-${
+                            task.priority
+                        }" onclick="cyclePriority(${
+            task.id
+        })">${capitalizeFirst(task.priority)}</span></td>
+                        <td class="loe" ondblclick="editLOE(${
+                            task.id
+                        })" title="Double-click to edit hours">
+                            ${loeDisplay}
+                        </td>
+                        <td class="sprint-start" ondblclick="editSprintStart(${
+                            task.id
+                        })">
+                            ${sprintStartDisplay}
                         </td>
                         <td class="deadline ${
                             overdue && task.status !== "completed"
@@ -622,6 +1521,11 @@ function renderTable() {
                         }" ondblclick="editDeadline(${task.id})">${formatDate(
             task.deadline
         )}</td>
+                        <td><span class="requirement requirement-${
+                            task.requirement
+                        }" onclick="cycleRequirement(${task.id})">${
+            task.requirement === "must-have" ? "Must" : "Nice"
+        }</span></td>
                         <td><span class="status ${displayStatus}" onclick="cycleStatus(${
             task.id
         })">${capitalizeFirst(displayStatus)}</span></td>
@@ -711,10 +1615,89 @@ function cycleStatus(taskId) {
 
     const statuses = ["pending", "in-progress", "completed"];
     const currentIndex = statuses.indexOf(task.status);
-    task.status = statuses[(currentIndex + 1) % statuses.length];
+    const nextStatus = statuses[(currentIndex + 1) % statuses.length];
+
+    // If marking as completed, prompt for actual hours
+    if (nextStatus === "completed" && task.actualHours === null) {
+        const actuals = prompt(
+            `Enter actual hours spent (estimated: ${task.hours}h):`,
+            task.hours
+        );
+        if (actuals !== null) {
+            if (!isNaN(actuals) && actuals.trim() !== "") {
+                task.actualHours = parseInt(actuals);
+            }
+        } else {
+            return; // User cancelled
+        }
+    }
+
+    task.status = nextStatus;
+    saveToStorage();
+    renderTable();
+}
+
+// Cycle priority
+function cyclePriority(taskId) {
+    const task = tasks.find((t) => t.id === taskId);
+    if (!task) return;
+
+    const priorities = ["low", "medium", "high"];
+    const currentIndex = priorities.indexOf(task.priority);
+    task.priority = priorities[(currentIndex + 1) % priorities.length];
 
     saveToStorage();
     renderTable();
+}
+
+// Cycle requirement
+function cycleRequirement(taskId) {
+    const task = tasks.find((t) => t.id === taskId);
+    if (!task) return;
+
+    task.requirement =
+        task.requirement === "must-have" ? "nice-to-have" : "must-have";
+    saveToStorage();
+    renderTable();
+}
+
+// Edit group
+function editGroup(taskId) {
+    const task = tasks.find((t) => t.id === taskId);
+    if (!task) return;
+
+    const newGroup = prompt(
+        "Enter group identifier (e.g., 1.1, 2.3) or leave empty:",
+        task.group || ""
+    );
+    if (newGroup !== null) {
+        task.group = newGroup.trim();
+        saveToStorage();
+        renderTable();
+    }
+}
+
+// Edit sprint start
+function editSprintStart(taskId) {
+    const task = tasks.find((t) => t.id === taskId);
+    if (!task) return;
+
+    const newSprintStart = prompt(
+        "Enter sprint start date (YYYY-MM-DD) or leave empty:",
+        task.sprintStart || ""
+    );
+    if (newSprintStart !== null) {
+        if (
+            newSprintStart.trim() === "" ||
+            newSprintStart.match(/^\d{4}-\d{2}-\d{2}$/)
+        ) {
+            task.sprintStart = newSprintStart.trim();
+            saveToStorage();
+            renderTable();
+        } else {
+            alert("Please enter a valid date (YYYY-MM-DD) or leave empty");
+        }
+    }
 }
 
 // Cycle assignee
@@ -796,6 +1779,50 @@ function editTask(taskId) {
         task.deadline = newDeadline;
     }
 
+    const newGroup = prompt("Group identifier (e.g., 1.1):", task.group || "");
+    if (newGroup !== null) {
+        task.group = newGroup.trim();
+    }
+
+    const newPriority = prompt("Priority (low/medium/high):", task.priority);
+    if (
+        newPriority !== null &&
+        ["low", "medium", "high"].includes(newPriority.toLowerCase())
+    ) {
+        task.priority = newPriority.toLowerCase();
+    }
+
+    const newRequirement = prompt(
+        "Requirement (must-have/nice-to-have):",
+        task.requirement
+    );
+    if (
+        newRequirement !== null &&
+        ["must-have", "nice-to-have"].includes(newRequirement.toLowerCase())
+    ) {
+        task.requirement = newRequirement.toLowerCase();
+    }
+
+    const newSprintStart = prompt(
+        "Sprint start (YYYY-MM-DD or empty):",
+        task.sprintStart || ""
+    );
+    if (newSprintStart !== null) {
+        if (
+            newSprintStart.trim() === "" ||
+            newSprintStart.match(/^\d{4}-\d{2}-\d{2}$/)
+        ) {
+            task.sprintStart = newSprintStart.trim();
+        }
+    }
+
+    if (task.status === "completed" && task.actualHours === null) {
+        const actuals = prompt("Enter actual hours (or leave empty):", "");
+        if (actuals !== null && actuals.trim() !== "" && !isNaN(actuals)) {
+            task.actualHours = parseInt(actuals);
+        }
+    }
+
     saveToStorage();
     renderTable();
 }
@@ -847,6 +1874,7 @@ function confirmImport() {
         const imported = JSON.parse(data);
         if (Array.isArray(imported) && imported.length > 0) {
             tasks = imported;
+            migrateTasks(); // Migrate imported tasks to include new fields
             saveToStorage();
             renderTable();
             closeImportModal();
@@ -874,6 +1902,53 @@ function addNewTask() {
         hours: 8,
         deadline: new Date().toISOString().split("T")[0],
         status: "pending",
+        group: "",
+        parentId: null,
+        priority: "medium",
+        requirement: "must-have",
+        sprintStart: "",
+        actualHours: null,
+        sprint: null,
+    };
+
+    tasks.push(newTask);
+    saveToStorage();
+    renderTable();
+}
+
+// Add subtask
+function addSubtask() {
+    const taskIdStr = prompt("Enter parent task ID:");
+    if (!taskIdStr) return;
+
+    const parentId = parseInt(taskIdStr);
+    const parent = tasks.find((t) => t.id === parentId);
+
+    if (!parent) {
+        alert("Parent task not found!");
+        return;
+    }
+
+    const newId = Math.max(...tasks.map((t) => t.id)) + 1;
+    const desc = prompt("Enter subtask description:");
+    if (desc === null || desc.trim() === "") return;
+
+    const newTask = {
+        id: newId,
+        desc: desc.trim(),
+        deps: parentId.toString(),
+        assignee: "both",
+        days: 0,
+        hours: 4,
+        deadline: parent.deadline,
+        status: "pending",
+        group: "",
+        parentId: parentId,
+        priority: "medium",
+        requirement: parent.requirement,
+        sprintStart: parent.sprintStart || "",
+        actualHours: null,
+        sprint: parent.sprint || null,
     };
 
     tasks.push(newTask);
@@ -892,12 +1967,12 @@ function renderUpcomingTasks() {
             ...t,
             daysUntil: daysUntilDeadline(t.deadline),
         }))
-        .filter((t) => t.daysUntil >= 0 && t.daysUntil <= 7) // Next 7 days
+        .filter((t) => t.daysUntil >= 0 && t.daysUntil <= 3) // Next 3 days
         .sort((a, b) => a.daysUntil - b.daysUntil);
 
     if (upcomingTasks.length === 0) {
         upcomingContainer.innerHTML =
-            '<p style="color: #999; text-align: center; padding: 20px;">No upcoming deadlines in the next 7 days! 🎉</p>';
+            '<p style="color: #999; text-align: center; padding: 20px;">No upcoming deadlines in the next 3 days! 🎉</p>';
         return;
     }
 
@@ -1141,5 +2216,10 @@ function resetToDefault() {
 
 // Initialize
 loadFromStorage();
+// Set initial sort dropdown value
+const sortSelect = document.getElementById("sort-select");
+if (sortSelect) {
+    sortSelect.value = currentSort;
+}
 renderTable();
 initNotifications();

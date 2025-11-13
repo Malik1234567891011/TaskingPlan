@@ -31,6 +31,9 @@
                     <button class="btn btn-secondary" onclick="addNewTask()">
                         ➕ Add Task
                     </button>
+                    <button class="btn btn-secondary" onclick="addSubtask()">
+                        📎 Add Subtask
+                    </button>
                     <button
                         class="btn btn-secondary"
                         onclick="resetToDefault()"
@@ -84,6 +87,28 @@
                 </div>
             </div>
 
+            <!-- Sorting Controls -->
+            <div class="sort-controls">
+                <label for="sort-select">Sort by:</label>
+                <select id="sort-select" onchange="applySorting()">
+                    <option value="group">Group Number</option>
+                    <option value="deadline">Deadline</option>
+                    <option value="priority">Priority</option>
+                    <option value="status">Status</option>
+                    <option value="assignee">Assigned To</option>
+                    <option value="requirement">Requirement (Must/Nice)</option>
+                    <option value="sprintStart">Sprint Start</option>
+                    <option value="id">Task ID</option>
+                </select>
+                <button
+                    class="btn btn-secondary btn-small"
+                    onclick="toggleGrouping()"
+                    id="group-toggle"
+                >
+                    📊 Toggle Grouping
+                </button>
+            </div>
+
             <div class="table-container">
                 <table>
                     <thead>
@@ -91,10 +116,14 @@
                             <th style="width: 40px">⠿</th>
                             <th>#</th>
                             <th>Task Description</th>
+                            <th>Group</th>
                             <th>Dependencies</th>
                             <th>Assigned To</th>
-                            <th>LOE</th>
+                            <th>Priority</th>
+                            <th>LOE / Actual</th>
+                            <th>Sprint Start</th>
                             <th>Deadline</th>
+                            <th>Requirement</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
